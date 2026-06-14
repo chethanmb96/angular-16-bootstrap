@@ -1,0 +1,25 @@
+<main class="container py-4">
+  <header class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 mb-4">
+    <h1 class="h3 mb-0">Angular 16 Bootstrap</h1>
+    <button class="btn btn-outline-secondary" type="button" (click)="resetProducts()">Reset data</button>
+  </header>
+
+  <section class="row g-4">
+    <div class="col-12 col-lg-4">
+      <app-product-form
+        [product]="selectedProduct"
+        (save)="saveProduct($event)"
+        (cancelEdit)="cancelEdit()"
+      ></app-product-form>
+    </div>
+
+    <div class="col-12 col-lg-8">
+      <app-product-list
+        [products]="products$ | async"
+        [selectedProductId]="selectedProduct?.id ?? null"
+        (edit)="editProduct($event)"
+        (delete)="deleteProduct($event)"
+      ></app-product-list>
+    </div>
+  </section>
+</main>

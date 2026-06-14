@@ -1,0 +1,50 @@
+<form class="card card-body" [formGroup]="productForm" (ngSubmit)="submit()">
+  <h2 class="h5 mb-3">{{ isEditing ? 'Edit product' : 'Add product' }}</h2>
+
+  <div class="mb-3">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-control" id="name" type="text" formControlName="name" placeholder="Product name">
+    <div class="form-text text-danger" *ngIf="productForm.controls.name.touched && productForm.controls.name.invalid">
+      Enter at least 2 characters.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" for="category">Category</label>
+    <input class="form-control" id="category" type="text" formControlName="category" placeholder="Category">
+    <div class="form-text text-danger" *ngIf="productForm.controls.category.touched && productForm.controls.category.invalid">
+      Category is required.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 mb-3">
+      <label class="form-label" for="price">Price</label>
+      <input class="form-control" id="price" type="number" formControlName="price" min="0.01" step="0.01">
+      <div class="form-text text-danger" *ngIf="productForm.controls.price.touched && productForm.controls.price.invalid">
+        Price must be greater than 0.
+      </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+      <label class="form-label" for="stock">Stock</label>
+      <input class="form-control" id="stock" type="number" formControlName="stock" min="0" step="1">
+      <div class="form-text text-danger" *ngIf="productForm.controls.stock.touched && productForm.controls.stock.invalid">
+        Stock cannot be negative.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" for="description">Description</label>
+    <textarea class="form-control" id="description" formControlName="description" rows="4" placeholder="Short product description"></textarea>
+    <div class="form-text text-danger" *ngIf="productForm.controls.description.touched && productForm.controls.description.invalid">
+      Enter at least 8 characters.
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary" type="submit">{{ isEditing ? 'Save changes' : 'Add product' }}</button>
+    <button class="btn btn-outline-secondary" *ngIf="isEditing" type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>

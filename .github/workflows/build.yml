@@ -1,0 +1,63 @@
+name: Build Angular 16 Bootstrap
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.2
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Set artifact name
+        id: artifact
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "zip_name=angular-16-bootstrap-${GITHUB_REF_NAME}.zip" >> "$GITHUB_OUTPUT"
+          else
+            echo "zip_name=angular-16-bootstrap-snapshot.zip" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Archive dist
+        run: |
+          cd dist
+          zip -r "../${{ steps.artifact.outputs.zip_name }}" angular-16-crud
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-16-bootstrap
+          path: ${{ steps.artifact.outputs.zip_name }}
+
+      - name: Publish GitHub release artifact
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.artifact.outputs.zip_name }}

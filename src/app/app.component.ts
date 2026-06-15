@@ -14,35 +14,33 @@ export class AppComponent {
 
   constructor(private readonly productService: ProductService) {}
 
-  saveProduct(payload: ProductPayload): void {
+  async saveProduct(payload: ProductPayload): Promise<void> {
     if (this.selectedProduct) {
-      this.productService.updateProduct(this.selectedProduct.id, payload).subscribe(() => {
-        this.selectedProduct = null;
-      });
+      await this.productService.updateProduct(
+        this.selectedProduct.id,
+        payload
+      );
+
+      this.selectedProduct = null;
       return;
     }
 
-    this.productService.addProduct(payload).subscribe();
+    await this.productService.addProduct(payload);
   }
 
   editProduct(product: Product): void {
     this.selectedProduct = product;
   }
 
-  deleteProduct(id: number): void {
+  async deleteProduct(id: number): Promise<void> {
     if (this.selectedProduct?.id === id) {
       this.selectedProduct = null;
     }
 
-    this.productService.deleteProduct(id).subscribe();
+    await this.productService.deleteProduct(id);
   }
 
   cancelEdit(): void {
     this.selectedProduct = null;
-  }
-
-  resetProducts(): void {
-    this.selectedProduct = null;
-    this.productService.resetProducts().subscribe();
   }
 }

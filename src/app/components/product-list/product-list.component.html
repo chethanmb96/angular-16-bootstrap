@@ -20,9 +20,7 @@
           *ngFor="let product of products; trackBy: trackByProductId"
           [class.table-warning]="product.id === selectedProductId"
         >
-          <td>
-            <strong>{{ product.name }}</strong>
-          </td>
+          <td><strong>{{ product.name }}</strong></td>
           <td>{{ product.category }}</td>
           <td>{{ product.price | currency }}</td>
           <td>{{ product.stock }}</td>

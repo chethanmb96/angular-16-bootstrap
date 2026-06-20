@@ -1,5 +1,18 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
 body {
-  background: #f8f9fa;
+  background: linear-gradient(to bottom, #f8fafc, #eef2f7);
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.table tbody tr:hover {
+  transition: background-color .2s ease;
 }

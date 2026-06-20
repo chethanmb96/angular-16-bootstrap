@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-16-crud": {
+    "angular-16-bootstrap": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-16-crud:build:production"
+              "browserTarget": "angular-16-bootstrap:build:production"
             },
             "development": {
-              "browserTarget": "angular-16-crud:build:development"
+              "browserTarget": "angular-16-bootstrap:build:development"
             }
           },
           "defaultConfiguration": "development"

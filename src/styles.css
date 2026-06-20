@@ -1,5 +1,19 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@picocss/pico/css/pico.min.css";
 
 body {
-  background: #f8f9fa;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

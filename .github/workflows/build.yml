@@ -48,7 +48,7 @@ jobs:
       - name: Archive dist
         run: |
           cd dist
-          zip -r "../${{ steps.artifact.outputs.zip_name }}" angular-16-crud
+          zip -r "../${{ steps.artifact.outputs.zip_name }}" angular-16-bootstrap
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4

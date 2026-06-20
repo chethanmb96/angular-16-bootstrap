@@ -27,8 +27,8 @@
           <td>{{ product.description }}</td>
           <td>
             <div class="d-flex gap-2">
-              <button class="btn btn-primary btn-sm" type="button" (click)="edit.emit(product)">Edit</button>
-              <button class="btn btn-danger btn-sm" type="button" (click)="delete.emit(product.id)">Delete</button>
+              <button class="btn btn-sm btn-outline-primary" type="button" (click)="edit.emit(product)">Edit</button>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="delete.emit(product.id)">Delete</button>
             </div>
           </td>
         </tr>
